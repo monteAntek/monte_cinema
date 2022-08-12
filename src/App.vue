@@ -1,11 +1,22 @@
-<script setup>
-
+<script>
+  import { defineComponent } from 'vue';
+  import HomePage from './pages/home-page.vue';
+  export default defineComponent({
+    components: {
+      HomePage,
+    }
+  });
 </script>
 
 <template>
-  <main></main>
+  <main>
+    <HomePage />
+  </main>
 </template>
 
-<style scoped>
-
+<style lang="scss" scoped>
+  main {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
 </style>
