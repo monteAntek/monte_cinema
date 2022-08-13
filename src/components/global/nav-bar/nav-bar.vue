@@ -1,9 +1,9 @@
 <script>
     import { defineComponent } from 'vue';
 
-    import MonteCinemaIcon from '../../../assets/icons/monte-cinema-logo.svg';
-    import ToggleNavOpenIcon from '../../../assets/icons/toggle-nav-open-icon.svg';
-    import ToggleNavClosedIcon from '../../../assets/icons/toggle-nav-closed-icon.svg';
+    import MonteCinemaIcon from '@/assets/icons/monte-cinema-logo.svg';
+    import ToggleNavOpenIcon from '@/assets/icons/toggle-nav-open-icon.svg';
+    import ToggleNavClosedIcon from '@/assets/icons/toggle-nav-closed-icon.svg';
     import NavLinks from './nav-links.vue';
     import NavButtonContainer from './nav-button-container.vue';
 
@@ -18,27 +18,21 @@
         },
         props: {
             userType: {
-                type: String,
-                default: 'public', //Others: client, employee
+                validator(value) {
+                    return ['public', 'client', 'employee'].includes(value);
+                },
             },
         },
         data() {
             return {
-                isScreenSmall: false,
                 isNavOpen: false,
+                isVisible: 'is-visible',
             }
         },
         methods: {
-            watchScreenSmall() {
-                this.isScreenSmall = window.innerWidth < 1024;
-            },
             toggleNavOpen() {
                 this.isNavOpen = !this.isNavOpen;
             },
-        },
-        created() {
-            this.watchScreenSmall();
-            window.addEventListener('resize', this.watchScreenSmall);
         },
     });
 </script>
@@ -54,15 +48,14 @@
             </div>
             <div 
                 class="nav-toggle-icon" 
-                v-if="isScreenSmall" 
                 @click="toggleNavOpen"
             >
                 <ToggleNavOpenIcon v-if="!isNavOpen" />
                 <ToggleNavClosedIcon v-if="isNavOpen" />
             </div>
         </div>
-        <NavLinks v-if="isScreenSmall && isNavOpen || !isScreenSmall" />
-        <NavButtonContainer v-if="isScreenSmall && isNavOpen || !isScreenSmall" />
+        <NavLinks class="nav-links" :class="{'is-visible' : isNavOpen}" />
+        <NavButtonContainer class="nav-button-container" :class="{'is-visible' : isNavOpen}" />
         
 
     </nav>
@@ -76,6 +69,10 @@
         align-items: center;
         padding: 0 48px;
         height: 112px;
+
+        .nav-toggle-icon {
+            display: none;
+        }
         
         @include screen-small {
             flex-direction: column;
@@ -90,12 +87,19 @@
                 padding: 30px 24px;
 
                 .nav-toggle-icon {
+                    display: block;
                     &:hover {
                         cursor: pointer;
                     }
                 }
             }
-            
+
+            .nav-links, .nav-button-container {
+                display: none;
+            }
+            .is-visible {
+                display: flex;
+            }
         }
 
         
