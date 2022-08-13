@@ -6,9 +6,9 @@ export default defineComponent({
    data() {
     return {
         urls: [
-            {id:1, displayName: 'Movies', url: '#'},
-            {id:2, displayName: 'Screenings', url: '#'},
-            {id:3, displayName: 'Contact us', url: '#'},
+            {id: 1, displayName: 'Movies', url: '#'},
+            {id: 2, displayName: 'Screenings', url: '#'},
+            {id: 3, displayName: 'Contact us', url: '#'},
         ],
     };
    },
