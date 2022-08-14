@@ -25,6 +25,7 @@
         justify-content: space-between;
         align-items: center;
         gap: 16px;
+        background-color: $color-snow-white;
         @include screen-small {
             flex-direction: column;
             width: 100%;
