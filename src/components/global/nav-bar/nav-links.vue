@@ -23,6 +23,7 @@ export default defineComponent({
     .navbar__links {
         display: flex;
         gap: 10px;
+        background-color: $color-snow-white;
         @include screen-small {
             flex-direction: column;
             width: 100%;
