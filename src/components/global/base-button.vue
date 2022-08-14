@@ -45,11 +45,9 @@
 
 <style lang="scss">
     .base-button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
         border: 2px solid transparent;
         border-radius: $button-radius;
+        text-align: center;
         font-weight: $fw-500;
         line-height: 100%;
         letter-spacing: 0.015em;
@@ -89,5 +87,14 @@
         
     }
     
+    .base-button[size="56"] {
+        padding: 19px 40px;
+        font-size: $fs-18;
+        
+    }
+    
+    .base-button[is="a"] {
+        display: inline-block;
+    }
 
 </style>
