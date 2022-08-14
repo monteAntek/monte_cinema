@@ -26,7 +26,6 @@
         data() {
             return {
                 isNavOpen: false,
-                isVisible: 'is-visible',
             }
         },
         methods: {
@@ -68,7 +67,8 @@
         justify-content: space-between;
         align-items: center;
         padding: 0 48px;
-        height: 112px;
+        min-height: 112px;
+        background-color: $color-snow-white;
 
         .nav-toggle-icon {
             display: none;
@@ -77,7 +77,7 @@
         @include screen-small {
             flex-direction: column;
             padding: 0 24px;
-            height: 98px;
+            min-height: 98px;
 
             .nav-header-small {
                 width: 100%;
