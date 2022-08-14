@@ -46,7 +46,7 @@
 <style lang="scss">
     .base-button {
         border: 2px solid transparent;
-        border-radius: $button-radius;
+        border-radius: $br-64;
         text-align: center;
         font-weight: $fw-500;
         line-height: 100%;

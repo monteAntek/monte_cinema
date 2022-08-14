@@ -4,10 +4,10 @@
     import HeroSection from '@/components/home-page/hero-section/hero-section.vue';
     
     export default defineComponent({
+        name: 'HomePage',
         components: {
             HeroSection,
         },
-        name: 'HomePage',
         props: {},
         data() {
             return {}
@@ -25,7 +25,10 @@
     .homepage {
         margin: 0 48px;
         @include screen-small {
+            margin: 0 48px;
+        @include screen-small {
             margin: 0 auto;
+        }
         }
     }
 </style>
