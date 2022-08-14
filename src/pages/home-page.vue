@@ -1,9 +1,11 @@
 <script>
     import { defineComponent } from 'vue';
-    import NavBar from '@/components/global/nav-bar/nav-bar.vue';
+
+    import HeroSection from '@/components/home-page/hero-section/hero-section.vue';
+    
     export default defineComponent({
         components: {
-            NavBar,
+            HeroSection,
         },
         name: 'HomePage',
         props: {},
@@ -15,12 +17,15 @@
 
 <template>
     <div class="homepage">
-        <NavBar />
+        <HeroSection />
     </div>
 </template>
 
 <style lang="scss" scoped>
     .homepage {
-        margin: 0 auto;
+        margin: 0 48px;
+        @include screen-small {
+            margin: 0 auto;
+        }
     }
 </style>
