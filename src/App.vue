@@ -1,15 +1,15 @@
 <script>
-  import { defineComponent } from 'vue';
+import { defineComponent } from 'vue';
 
-  import HomePage from '@/pages/home-page.vue';
-  import NavBar from '@/components/global/nav-bar/nav-bar.vue'
+import HomePage from '@/pages/HomePage.vue';
+import NavBar from '@/components/global/NavBar/NavBar.vue'
 
-  export default defineComponent({
-    components: {
-      HomePage,
-      NavBar,
-    }
-  });
+export default defineComponent({
+  components: {
+    HomePage,
+    NavBar,
+  }
+});
 </script>
 
 <template>
@@ -22,8 +22,8 @@
 </template>
 
 <style lang="scss" scoped>
-  main {
-    max-width: 1440px;
-    margin: 0 auto;
-  }
+main {
+  max-width: 1440px;
+  margin: 0 auto;
+}
 </style>
