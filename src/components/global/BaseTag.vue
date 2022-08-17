@@ -10,7 +10,7 @@ export default defineComponent({
     },
     props: {
         labels: {
-            type: [String],
+            type: Array,
             required: true,
         },
         colorScheme: {
@@ -26,17 +26,11 @@ export default defineComponent({
 <template>
     <div 
         class="base-tag"
-        :labels="labels"
         :colorScheme="colorScheme"
     >
-        <div class="base-tag-label-container" v-for="label in labels" :key="label">
-            <div class="base-tag-label" v-if="labels.length === 1">
-                <span class="base-tag-label-text">{{label}}</span>
-            </div>
-            <div class="base-tag-label" v-else-if="labels.length > 1">
-                <span class="base-tag-label-text">{{label}}</span>
-                <TagEllipse class="base-tag-label-ellipse"  />
-            </div>
+        <div class="base-tag-label-container" v-for="(label, index) in labels" :key="index">
+            <span class="base-tag-label">{{label}}</span>
+            <TagEllipse class="base-tag-label-ellipse" v-if="labels.length > 1" />
         </div>
     </div>
 </template>
@@ -44,24 +38,25 @@ export default defineComponent({
 <style lang="scss" scoped>
 .base-tag {
     flex-shrink: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
     padding: 8px 16px;
     border-radius: $br-64;
     .base-tag-label-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+    gap: 8px;
 
-    .base-tag-label {
-
-        .base-tag-label-text {
+        .base-tag-label {
             font-family: $font-roboto;
             font-weight: $fw-700;
             font-size: $fs-14;
             line-height: 114%;
         }
     }
-}
 }
 
 .base-tag[colorScheme='red'] { 
