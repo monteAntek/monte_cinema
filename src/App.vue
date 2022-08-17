@@ -1,7 +1,7 @@
 <script>
 import { defineComponent } from 'vue';
 
-import HomePage from '@/pages/HomePage.vue';
+import HomePage from '@/views/HomePage.vue';
 import NavBar from '@/components/global/NavBar/NavBar.vue'
 
 export default defineComponent({
