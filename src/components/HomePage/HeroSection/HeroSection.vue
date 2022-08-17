@@ -33,7 +33,8 @@ export default defineComponent({
 <style lang="scss" scoped>
 .hero-section {
     display: flex;
-    
+    margin-bottom: 64px;
+
     .hero-text-container {
         padding: 80px;
         background-color: $color-wisp-pink;
