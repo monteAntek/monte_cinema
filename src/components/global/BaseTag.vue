@@ -11,9 +11,7 @@ export default defineComponent({
     props: {
         labels: {
             type: Array,
-            default() {
-                return ['label'];
-            },
+            default: () => ['label'],
         },
         colorScheme: {
             validator(value) {
