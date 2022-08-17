@@ -11,25 +11,20 @@ export default defineComponent({
     props: {
         movieTitle: {
             type: String,
-            required: true,
+            default: 'Movie Title I',
         },
         movieImgUrl: {
             type: String,
-            required: true,
+            default: 'https://via.placeholder.com/300x150'
         },
         movieLength: {
             type: Number,
-            required: true,
+            default: 150,
         },
         movieGenre: {
             type: String,
-            required: true,
+            default: 'Genre',
         },
-    },
-    data() {
-        return {
-            bgImage: {backgroundImage: `url(${this.movieImgUrl})`},
-        }
     },
     methods: {
         movieDuration(movieLength) {
@@ -38,7 +33,7 @@ export default defineComponent({
             return `${hours}h ${minutes}min`;
             
         }
-    }
+    },
 });
 </script>
 
@@ -46,9 +41,7 @@ export default defineComponent({
     <div class="movies-section-card">
         <h3 class="movies-section-card-title">{{movieTitle}}</h3>
         <span class="movies-section-card-duration">{{movieDuration(movieLength)}}</span>
-        <div class="movies-section-card-image" :style="bgImage">
-            
-        </div>
+        <img class="movies-section-card-image" :src="movieImgUrl">
         <BaseTag :labels="[movieGenre]" colorScheme='red'/>
     </div>
 </template>
@@ -83,9 +76,9 @@ export default defineComponent({
 
     .movies-section-card-image {
         width: 100%;
-        height: 192px;
-        background-repeat: no-repeat;
-        background-size: cover;
+        max-height: 192px;
+        object-fit: cover;
+        object-position: top;
         margin-bottom: 16px;
     }
 
