@@ -10,10 +10,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `
-          @import "@/assets/styles/_variables";
-          @import "@/assets/styles/_mixins";
-        `
+        additionalData: `@import "@/styles/global/index.scss";`
       }
     }
   },
