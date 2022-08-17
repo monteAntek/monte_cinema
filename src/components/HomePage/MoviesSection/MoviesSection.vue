@@ -63,10 +63,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .movies-section {
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: center;
-    // align-items: center;
     margin-bottom: 64px;
 
     .movies-section-header {
