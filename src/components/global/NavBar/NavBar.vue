@@ -49,14 +49,12 @@ export default defineComponent({
                 class="nav-toggle-icon" 
                 @click="toggleNavOpen"
             >
-                <ToggleNavOpenIcon v-if="!isNavOpen" />
-                <ToggleNavClosedIcon v-if="isNavOpen" />
+                <ToggleNavOpenIcon v-show="!isNavOpen" />
+                <ToggleNavClosedIcon v-show="isNavOpen" />
             </div>
         </div>
         <NavLinks class="nav-links" :class="{'is-visible' : isNavOpen}" />
         <NavButtonContainer class="nav-button-container" :class="{'is-visible' : isNavOpen}" />
-        
-
     </nav>
 </template>
 
