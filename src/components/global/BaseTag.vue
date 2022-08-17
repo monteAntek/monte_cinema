@@ -11,13 +11,15 @@ export default defineComponent({
     props: {
         labels: {
             type: Array,
-            required: true,
+            default() {
+                return ['label'];
+            },
         },
         colorScheme: {
             validator(value) {
                 return ['red', 'gray', 'transparent'].includes(value);
             },
-            required: true,
+            default: 'red',
         },
     },
 });
@@ -30,7 +32,7 @@ export default defineComponent({
     >
         <div class="base-tag-label-container" v-for="(label, index) in labels" :key="index">
             <span class="base-tag-label">{{label}}</span>
-            <TagEllipse class="base-tag-label-ellipse" v-if="labels.length > 1" />
+            <TagEllipse class="base-tag-label-ellipse" v-if="index < labels.length - 1" />
         </div>
     </div>
 </template>
