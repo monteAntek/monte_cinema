@@ -1,0 +1,40 @@
+@mixin moviesGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 40px;
+    grid-row-gap: 40px;
+
+    @include screen-medium {
+      grid-template-columns: repeat(2, 1fr);
+      grid-row-gap: 40px;
+    }
+
+    @include screen-small {
+      grid-template-columns: repeat(1, 1fr);
+      grid-row-gap: 40px;
+    }
+}
+
+@mixin inputLabel {
+  display: block;
+  font-family: $font-roboto-mono;
+  font-weight: $fw-700;
+  font-size: $fs-14;
+  line-height: 1.28;
+  text-transform: uppercase;
+  color: $color-bittersweet-red;
+}
+
+@mixin inputInput {
+  width: 100%;
+  padding: 18px 24px;
+  border: 1px solid transparent;
+  border-radius: $br-8;
+  background-color: $color-athens-gray;
+  font-family: $font-roboto;
+  font-weight: $fw-400;
+  font-size: $fs-18;
+  line-height: 1.16;
+  
+}
