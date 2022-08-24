@@ -19,15 +19,7 @@ export default defineComponent({
 
 <template>
   <section class="container">
-    <MovieCard
-      v-for="movie in movies"
-      :key="movie.id"
-      :movieId="movie.id"
-      :movieTitle="movie.title"
-      :movieImgUrl="movie.poster_url"
-      :movieLength="movie.length"
-      :movieGenre="movie.genre.name"
-    />
+    <MovieCard v-for="movie in movies" :key="movie.id" :movie="movie" />
   </section>
 </template>
 
