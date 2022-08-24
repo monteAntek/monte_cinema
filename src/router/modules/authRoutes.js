@@ -1,6 +1,5 @@
 export default {
   path: 'auth',
-  component: () => import('@/views/MainView.vue'),
   children: [
     {
       name: 'Register',

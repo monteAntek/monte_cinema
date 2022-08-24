@@ -1,6 +1,5 @@
 export default {
   path: 'movies',
-  component: () => import('@/views/MainView.vue'),
   children: [
     {
       name: 'Movies',
