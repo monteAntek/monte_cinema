@@ -11,7 +11,7 @@ export const useMoviesStore = defineStore({
   },
   getters: {
     genres() {
-      return this.allMovies.map((movie) => movie.genre.name);
+      return [...new Set(this.allMovies.map((movie) => movie.genre.name))];
     }
   },
   actions: {
