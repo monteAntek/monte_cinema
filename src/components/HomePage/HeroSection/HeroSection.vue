@@ -24,7 +24,6 @@ export default defineComponent({
       </p>
       <BaseButton
         class="hero__text-container__action-button"
-        to="#"
         colorScheme="red-fill"
         size="x-large"
       >
