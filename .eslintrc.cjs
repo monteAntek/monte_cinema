@@ -2,13 +2,12 @@
 module.exports = {
   root: true,
   extends: [
-    "eslint:recommended",
-    "plugin:vue/vue3-essential",
-    "plugin:prettier/recommended",
+    'eslint:recommended',
+    'plugin:vue/vue3-essential',
+    'plugin:prettier/recommended'
   ],
-  plugins: ["prettier"],
+  plugins: ['prettier'],
   rules: {
-    semi: "always",
-    "prettier/prettier": "error",
-  },
+    'prettier/prettier': 'error'
+  }
 };
