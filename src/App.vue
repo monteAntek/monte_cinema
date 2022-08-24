@@ -1,23 +1,24 @@
 <script>
 import { defineComponent } from 'vue';
 
+import { mapState, mapActions } from 'pinia';
+
 import NavBar from '@/components/global/NavBar/NavBar.vue';
-import MainView from '@/views/MainView.vue';
 
 import { useMoviesStore } from '@/store/movies.js';
 
 export default defineComponent({
   components: {
-    NavBar,
-    MainView
+    NavBar
   },
-  data() {
-    return {
-      allMovies: useMoviesStore().fetchAllMovies()
-    };
+  computed: {
+    ...mapState(useMoviesStore, ['allMovies', 'genres'])
+  },
+  methods: {
+    ...mapActions(useMoviesStore, ['fetchAllMovies'])
   },
   mounted() {
-    this.allMovies;
+    this.fetchAllMovies();
   }
 });
 </script>
@@ -27,7 +28,7 @@ export default defineComponent({
     <NavBar />
   </header>
   <main>
-    <MainView class="main-view" />
+    <router-view class="main-view"></router-view>
   </main>
 </template>
 
