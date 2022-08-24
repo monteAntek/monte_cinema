@@ -3,14 +3,15 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'NavLinks',
-  data() {
-    return {
-      urls: [
-        { id: 1, displayName: 'Movies', routeName: 'Movies' },
-        { id: 2, displayName: 'Screenings', routeName: 'Screenings' },
-        { id: 3, displayName: 'Contact us', routeName: 'Contact' }
-      ]
-    };
+  urls: [
+    { id: 1, displayName: 'Movies', routeName: 'Movies' },
+    { id: 2, displayName: 'Screenings', routeName: 'Screenings' },
+    { id: 3, displayName: 'Contact us', routeName: 'Contact' }
+  ],
+  computed: {
+    useUrls() {
+      return this.$options.urls;
+    }
   }
 });
 </script>
@@ -19,7 +20,7 @@ export default defineComponent({
   <div class="container">
     <router-link
       class="container__link"
-      v-for="url in urls"
+      v-for="url in useUrls"
       :key="url.id"
       :to="{ name: url.routeName }"
     >
