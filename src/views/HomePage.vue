@@ -1,11 +1,12 @@
 <script>
 import { defineComponent } from 'vue';
 
+import { mapState } from 'pinia';
+
 import HeroSection from '@/components/HomePage/HeroSection/HeroSection.vue';
 import MoviesSection from '@/components/HomePage/MoviesSection/MoviesSection.vue';
 
 import { useMoviesStore } from '@/store/movies';
-const moviesStore = useMoviesStore();
 
 export default defineComponent({
   name: 'HomePage',
@@ -14,11 +15,9 @@ export default defineComponent({
     MoviesSection
   },
   computed: {
-    movies() {
-      return moviesStore.allMovies;
-    },
+    ...mapState(useMoviesStore, ['allMovies']),
     comingSoon() {
-      return this.movies.filter((movie, index) => index < 3);
+      return this.allMovies.filter((movie, index) => index < 3);
     }
   }
 });
