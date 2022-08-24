@@ -4,7 +4,6 @@ import authRoutes from './authRoutes';
 export default [
   {
     path: '/',
-    component: () => import('@/views/MainView.vue'),
     children: [
       {
         name: 'Home',
