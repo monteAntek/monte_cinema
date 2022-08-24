@@ -9,31 +9,17 @@ export default defineComponent({
     BaseTag
   },
   props: {
-    movieId: {
-      type: Number,
-      default: 1
-    },
-    movieTitle: {
-      type: String,
-      default: 'Movie Title I'
-    },
-    movieImgUrl: {
-      type: String,
-      default: 'https://via.placeholder.com/300x150'
-    },
-    movieLength: {
-      type: Number,
-      default: 150
-    },
-    movieGenre: {
-      type: String,
-      default: 'Genre'
+    movie: {
+      type: Object,
+      default() {
+        return {};
+      }
     }
   },
-  methods: {
-    movieDuration(movieLength) {
-      const hours = Math.floor(movieLength / 60);
-      const minutes = `0${movieLength % 60}`.slice(-2);
+  computed: {
+    movieDuration() {
+      const hours = Math.floor(this.movie.length / 60);
+      const minutes = `0${this.movie.length % 60}`.slice(-2);
       return `${hours}h ${minutes}min`;
     }
   }
@@ -44,13 +30,13 @@ export default defineComponent({
   <div class="card">
     <router-link
       class="card__title"
-      :to="{ name: 'Movie', params: { movieId: movieId } }"
+      :to="{ name: 'Movie', params: { movieId: movie.id } }"
     >
-      {{ movieTitle }}
+      {{ movie.title }}
     </router-link>
-    <span class="card__duration">{{ movieDuration(movieLength) }}</span>
-    <img class="card__image" :src="movieImgUrl" />
-    <BaseTag :labels="[movieGenre]" colorScheme="red" />
+    <span class="card__duration">{{ movieDuration }}</span>
+    <img class="card__image" :src="movie.poster_url" :alt="movie.title" />
+    <BaseTag :labels="[movie.genre.name]" colorScheme="red" />
   </div>
 </template>
 
