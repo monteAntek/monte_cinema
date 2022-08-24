@@ -11,38 +11,16 @@ export default defineComponent({
   props: {
     movies: {
       type: Array,
-      default: [
-        {
-          id: 1,
-          title: "Harry Potter and the Philosopher's Stone",
-          genre: { id: 3, name: 'Fantasy' },
-          poster_url:
-            'https://images-na.ssl-images-amazon.com/images/I/713KEd-8jyL._AC_SL1500_.jpg',
-          length: 159
-        },
-        {
-          id: 2,
-          title: 'Star Wars Episode IV: A New Hope',
-          genre: { id: 4, name: 'Sci-Fi' },
-          poster_url:
-            'https://img01.mgo-images.com/image/thumbnail/v2/content/MMVD85527F13D6BC8CB6518D4B8DF956FAD2.jpeg',
-          length: 125
-        },
-        {
-          id: 3,
-          title: "You've got Mail",
-          genre: { id: 5, name: 'Romance' },
-          poster_url: 'https://miro.medium.com/max/520/0*JeA6QiQ6BzuNzKHP.jpg',
-          length: 120
-        }
-      ]
+      default() {
+        return [];
+      }
     }
   }
 });
 </script>
 
 <template>
-  <section class="movies">
+  <section class="movies" v-if="movies.length">
     <div class="movies__header">
       <h2 class="movies__header__text">
         soon<span class="movies__header__text--toggle"> in the cinema</span>
@@ -56,11 +34,7 @@ export default defineComponent({
         class="movies__cards__item"
         v-for="movie in movies"
         :key="movie.id"
-        :movieId="movie.id"
-        :movieTitle="movie.title"
-        :movieImgUrl="movie.poster_url"
-        :movieLength="movie.length"
-        :movieGenre="movie.genre.name"
+        :movie="movie"
       />
     </div>
   </section>
