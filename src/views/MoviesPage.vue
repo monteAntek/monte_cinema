@@ -1,12 +1,13 @@
 <script>
 import { defineComponent } from 'vue';
 
+import { mapState } from 'pinia';
+
 import BaseTextInput from '@/components/global/BaseTextInput.vue';
 import BaseSelect from '@/components/global/BaseSelect.vue';
 import MoviesContainer from '@/components/MoviesPage/MoviesContainer.vue';
 
 import { useMoviesStore } from '@/store/movies';
-const moviesStore = useMoviesStore();
 
 export default defineComponent({
   name: 'MoviesPage',
@@ -22,17 +23,12 @@ export default defineComponent({
     };
   },
   computed: {
-    movies() {
-      return moviesStore.allMovies;
-    },
-    genres() {
-      return [...new Set(moviesStore.genres)];
-    },
+    ...mapState(useMoviesStore, ['allMovies', 'genres']),
     moviesByGenre() {
       return this.movieCategory === '' ||
         this.movieCategory === 'All Categories'
-        ? this.movies
-        : this.movies.filter(
+        ? this.allMovies
+        : this.allMovies.filter(
             (movie) => movie.genre.name === this.movieCategory
           );
     },
