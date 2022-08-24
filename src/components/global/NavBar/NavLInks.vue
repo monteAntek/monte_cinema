@@ -7,12 +7,7 @@ export default defineComponent({
     { id: 1, displayName: 'Movies', routeName: 'Movies' },
     { id: 2, displayName: 'Screenings', routeName: 'Screenings' },
     { id: 3, displayName: 'Contact us', routeName: 'Contact' }
-  ],
-  computed: {
-    useUrls() {
-      return this.$options.urls;
-    }
-  }
+  ]
 });
 </script>
 
@@ -20,7 +15,7 @@ export default defineComponent({
   <div class="container">
     <router-link
       class="container__link"
-      v-for="url in useUrls"
+      v-for="url in $options.urls"
       :key="url.id"
       :to="{ name: url.routeName }"
     >
