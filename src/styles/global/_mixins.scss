@@ -36,5 +36,14 @@
   font-weight: $fw-400;
   font-size: $fs-18;
   line-height: 1.16;
-  
+  appearance: none;
+
+}
+
+@mixin headingFontFace {
+  font-family: $font-eczar;
+  font-weight: $fw-600;
+  font-size: $fs-80;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
 }
