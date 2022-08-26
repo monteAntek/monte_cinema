@@ -40,8 +40,11 @@ export default defineComponent({
       v-for="(label, index) in labels"
       :key="index"
     >
-      <span class="tag__label">{{ label }}</span>
-      <TagEllipse class="tag__label-ellipse" v-if="index < labels.length - 1" />
+      <span class="tag__label-container__label">{{ label }}</span>
+      <TagEllipse
+        class="tag__label-container__label-ellipse"
+        v-if="index < labels.length - 1"
+      />
     </div>
   </div>
 </template>
@@ -61,11 +64,15 @@ export default defineComponent({
     align-items: center;
     gap: 8px;
 
-    .tag__label {
+    &__label {
       font-family: $font-roboto;
       font-weight: $fw-700;
       font-size: $fs-14;
       line-height: 1.14;
+    }
+
+    &__label-ellipse {
+      color: inherit;
     }
   }
   &--red {
