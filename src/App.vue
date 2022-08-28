@@ -4,12 +4,16 @@ import { defineComponent } from 'vue';
 import { mapState, mapActions } from 'pinia';
 
 import NavBar from '@/components/global/NavBar/NavBar.vue';
+import DataLoader from '@/components/global/DataLoader.vue';
+import ErrorBoundary from '@/components/global/ErrorBoundary.vue';
 
 import { useMoviesStore } from '@/store/movies.js';
 
 export default defineComponent({
   components: {
-    NavBar
+    NavBar,
+    DataLoader,
+    ErrorBoundary
   },
   data() {
     return {
@@ -26,12 +30,6 @@ export default defineComponent({
   },
   mounted() {
     this.fetchAllMovies();
-  },
-  errorCaptured(err, instance, info) {
-    this.error = err;
-    this.errorInstance = instance;
-    this.errorInfo = info;
-    return false;
   }
 });
 </script>
@@ -40,29 +38,19 @@ export default defineComponent({
   <header>
     <NavBar />
   </header>
-  <template v-if="error">
-    <div class="error">
-      <p>{{ error }}</p>
-      <br />
-      <p>{{ errorInstance }}</p>
-      <br />
-      <p>{{ errorInfo }}</p>
-    </div>
-  </template>
-  <template v-if="!error">
-    <main>
-      <router-view class="main-view"></router-view>
-    </main>
-  </template>
+  <ErrorBoundary>
+    <Suspense>
+      <main>
+        <router-view></router-view>
+      </main>
+      <template #fallback>
+        <DataLoader />
+      </template>
+    </Suspense>
+  </ErrorBoundary>
 </template>
 
 <style lang="scss" scoped>
-.error {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
 main {
   max-width: 1440px;
   margin: 0 48px;
