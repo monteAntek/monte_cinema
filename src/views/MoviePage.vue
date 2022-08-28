@@ -12,7 +12,6 @@ export default defineComponent({
   },
   data() {
     return {
-      id: this.$route.params.movieId,
       movie: {
         id: null,
         title: '',
@@ -24,12 +23,10 @@ export default defineComponent({
       }
     };
   },
-  methods: {
-    async getMovieData() {
-      this.movie = await getMovieDetails(this.id);
-    }
-  },
   computed: {
+    movieId() {
+      return this.$route.params.movieId;
+    },
     movieDuration() {
       const hours = Math.floor(this.movie.length / 60);
       const minutes = `0${this.movie.length % 60}`.slice(-2);
@@ -39,11 +36,21 @@ export default defineComponent({
       return this.movie.genre.name;
     },
     movieReleaseYear() {
-      return this.movie.release_date.slice(0, 4);
+      const releaseDate = new Date(this.movie.release_date);
+      return releaseDate.getFullYear();
     }
   },
-  mounted() {
-    this.getMovieData(this.id);
+  watch: {
+    movieId: {
+      immediate: true,
+      async handler(movieId) {
+        try {
+          this.movie = await getMovieDetails(movieId);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    }
   }
 });
 </script>
@@ -64,7 +71,9 @@ export default defineComponent({
           colorScheme="gray"
         />
       </div>
-      <p class="movie__text-container__description">{{ movie.description }}</p>
+      <p class="movie__text-container__description">
+        {{ movie.description }}
+      </p>
     </div>
     <div class="movie__image-container">
       <img
