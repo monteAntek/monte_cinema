@@ -35,17 +35,10 @@ export default defineComponent({
 
 <template>
   <div :class="tagLabels" :colorScheme="colorScheme">
-    <div
-      class="tag__label-container"
-      v-for="(label, index) in labels"
-      :key="index"
-    >
-      <span class="tag__label-container__label">{{ label }}</span>
-      <TagEllipse
-        class="tag__label-container__label-ellipse"
-        v-if="index < labels.length - 1"
-      />
-    </div>
+    <span class="tag__label" v-for="(label, index) in labels" :key="index"
+      >{{ label }}
+      <TagEllipse class="tag__label-ellipse" v-if="index < labels.length - 1" />
+    </span>
   </div>
 </template>
 
@@ -58,23 +51,22 @@ export default defineComponent({
   gap: 10px;
   padding: 8px 16px;
   border-radius: $br-64;
-  &__label-container {
+
+  &__label {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 8px;
-
-    &__label {
-      font-family: $font-roboto;
-      font-weight: $fw-700;
-      font-size: $fs-14;
-      line-height: 1.14;
-    }
-
-    &__label-ellipse {
-      color: inherit;
-    }
+    font-family: $font-roboto;
+    font-weight: $fw-700;
+    font-size: $fs-14;
+    line-height: 1.14;
   }
+
+  &__label-ellipse {
+    color: inherit;
+  }
+
   &--red {
     background-color: $color-wisp-pink;
     color: $color-bittersweet-red;
