@@ -15,13 +15,6 @@ export default defineComponent({
     DataLoader,
     ErrorBoundary
   },
-  data() {
-    return {
-      error: null,
-      errorInstance: null,
-      errorInfo: ''
-    };
-  },
   computed: {
     ...mapState(useMoviesStore, ['allMovies', 'genres'])
   },
