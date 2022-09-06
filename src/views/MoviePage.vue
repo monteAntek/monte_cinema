@@ -1,7 +1,7 @@
 <script>
 import { defineComponent } from 'vue';
 
-import { getMovieDetails } from '../api/monteCinemaApi';
+import { getMovieDetails } from '@/api/movies';
 
 import BaseTag from '@/components/global/BaseTag.vue';
 
