@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-import { getAllMovies } from '../api/monteCinemaApi';
+import { getAllMovies } from '@/api/movies';
 
 export const useMoviesStore = defineStore({
   id: 'moviesStore',
