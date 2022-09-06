@@ -1,6 +1,9 @@
 <script>
 import { defineComponent } from 'vue';
 
+import { mapState } from 'pinia';
+import { useAuthStore } from '@/store/auth.js';
+
 import MonteCinemaIcon from '@/assets/icons/monte-cinema-logo.svg';
 import ToggleNavOpenIcon from '@/assets/icons/toggle-nav-open-icon.svg';
 import ToggleNavClosedIcon from '@/assets/icons/toggle-nav-closed-icon.svg';
@@ -16,13 +19,6 @@ export default defineComponent({
     NavLinks,
     NavButtonContainer
   },
-  props: {
-    userType: {
-      validator(value) {
-        return ['public', 'client', 'employee'].includes(value);
-      }
-    }
-  },
   data() {
     return {
       isNavOpen: false
@@ -32,12 +28,18 @@ export default defineComponent({
     toggleNavOpen() {
       this.isNavOpen = !this.isNavOpen;
     }
+  },
+  computed: {
+    ...mapState(useAuthStore, ['isLoggedIn']),
+    currentRouteName() {
+      return this.$route.name;
+    }
   }
 });
 </script>
 
 <template>
-  <nav class="nav" :userType="userType">
+  <nav class="nav">
     <div class="nav__header--small">
       <router-link :to="{ name: 'Home' }" class="nav__logo">
         <MonteCinemaIcon />
@@ -47,14 +49,21 @@ export default defineComponent({
         <ToggleNavClosedIcon v-show="isNavOpen" />
       </div>
     </div>
-    <NavLinks
-      class="nav__links"
-      :class="{ 'nav__links--is-visible': isNavOpen }"
-    />
-    <NavButtonContainer
-      class="nav__actions"
-      :class="{ 'nav__actions--is-visible': isNavOpen }"
-    />
+    <template
+      v-if="currentRouteName === 'Login' || currentRouteName === 'Register'"
+    >
+      <span class="auth-slogan" :class="{ 'is-visible': isNavOpen }"
+        >developed with ❤️ by monterail</span
+      >
+    </template>
+    <template v-else>
+      <NavLinks class="nav__links" :class="{ 'is-visible': isNavOpen }" />
+      <NavButtonContainer
+        class="nav__actions"
+        :class="{ 'is-visible': isNavOpen }"
+        :isLoggedIn="isLoggedIn"
+      />
+    </template>
   </nav>
 </template>
 
@@ -95,10 +104,23 @@ export default defineComponent({
     &__links,
     &__actions {
       display: none;
-      &--is-visible {
-        display: block;
-        margin-bottom: 32px;
-      }
+    }
+    .is-visible {
+      display: block;
+      margin-bottom: 32px;
+    }
+  }
+
+  .auth-slogan {
+    font-family: $font-roboto-mono;
+    font-weight: $fw-500;
+    font-size: $fs-16;
+    line-height: 1.3;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: $color-tuna-gray;
+    @include screen-small {
+      display: none;
     }
   }
 }
