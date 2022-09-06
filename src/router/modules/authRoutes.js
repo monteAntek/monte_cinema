@@ -1,15 +1,14 @@
 export default {
   path: 'auth',
+  component: () => import('@/views/AuthPage.vue'),
   children: [
     {
       name: 'Register',
-      path: 'register',
-      component: () => import('@/views/RegisterPage.vue')
+      path: 'register'
     },
     {
       name: 'Login',
-      path: 'login',
-      component: () => import('@/views/LoginPage.vue')
+      path: 'login'
     }
   ]
 };
