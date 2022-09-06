@@ -34,7 +34,7 @@ export default defineComponent({
   <ErrorBoundary>
     <Suspense>
       <main>
-        <router-view></router-view>
+        <router-view class="main-view"></router-view>
       </main>
       <template #fallback>
         <DataLoader />
@@ -46,9 +46,12 @@ export default defineComponent({
 <style lang="scss" scoped>
 main {
   max-width: 1440px;
-  margin: 0 48px;
-  @include screen-small {
-    margin: 0 auto;
+  margin: 0 auto;
+  .main-view {
+    margin: 0 48px;
+    @include screen-small {
+      margin: 0 auto;
+    }
   }
 }
 </style>
