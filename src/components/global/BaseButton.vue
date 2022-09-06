@@ -5,12 +5,10 @@ export default defineComponent({
   name: 'BaseButton',
   props: {
     type: {
-      type: String,
-      default: 'button'
+      type: String
     },
     to: {
-      type: Object,
-      default: { name: 'Home' }
+      type: Object
     },
     colorScheme: {
       type: String,
@@ -19,6 +17,7 @@ export default defineComponent({
           'red-fill',
           'red-border',
           'pink-border',
+          'pink-BG',
           'gray-fill',
           'gray-border',
           'red-text',
@@ -42,6 +41,7 @@ export default defineComponent({
         { 'button--red-fill': this.colorScheme === 'red-fill' },
         { 'button--red-border': this.colorScheme === 'red-border' },
         { 'button--pink-border': this.colorScheme === 'pink-border' },
+        { 'button--pink-BG': this.colorScheme === 'pink-BG' },
         { 'button--gray-fill': this.colorScheme === 'gray-fill' },
         { 'button--gray-border': this.colorScheme === 'gray-border' },
         { 'button--red-text': this.colorScheme === 'red-text' },
@@ -53,7 +53,7 @@ export default defineComponent({
       ];
     }
   },
-  emits: ['click']
+  emits: ['click', 'submit']
 });
 </script>
 
@@ -69,6 +69,7 @@ export default defineComponent({
       :class="buttonClasses"
       :colorScheme="colorScheme"
       @click="$emit('click', $event)"
+      @submit="$emit('submit', $event)"
     >
       <slot />
     </button>
@@ -107,6 +108,18 @@ export default defineComponent({
     }
   }
 
+  &--gray-fill {
+    background-color: $color-athens-gray;
+    border-color: $color-athens-gray;
+    color: $color-jumbo-gray;
+    &:hover,
+    &:active,
+    &:focus,
+    &:focus-visible {
+      border-color: $color-jumbo-gray;
+    }
+  }
+
   &--red-text {
     background-color: transparent;
     border-color: transparent;
@@ -116,6 +129,18 @@ export default defineComponent({
     &:focus,
     &:focus-visible {
       background-color: $color-wisp-pink;
+      border-color: $color-cherry-red;
+    }
+  }
+
+  &--pink-BG {
+    background-color: $color-fair-pink;
+    border-color: $color-fair-pink;
+    color: $color-cherry-red;
+    &:hover,
+    &:active,
+    &:focus,
+    &:focus-visible {
       border-color: $color-cherry-red;
     }
   }
