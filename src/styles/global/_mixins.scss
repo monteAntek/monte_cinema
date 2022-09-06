@@ -47,3 +47,13 @@
   line-height: 1.02;
   letter-spacing: -0.01em;
 }
+
+@mixin inputActive {
+  background: $color-activeBG-blue;
+  border: 1px solid $color-activeBorder-blue;
+}
+
+@mixin inputError {
+  background: $color-athens-gray;
+  border: 1px solid $color-cherry-red;
+}
