@@ -8,7 +8,7 @@ export default defineComponent({
       type: String
     },
     to: {
-      type: Object
+      type: [String, Object]
     },
     colorScheme: {
       type: String,
@@ -53,7 +53,7 @@ export default defineComponent({
       ];
     }
   },
-  emits: ['click', 'submit']
+  emits: ['click']
 });
 </script>
 
@@ -69,7 +69,6 @@ export default defineComponent({
       :class="buttonClasses"
       :colorScheme="colorScheme"
       @click="$emit('click', $event)"
-      @submit="$emit('submit', $event)"
     >
       <slot />
     </button>
