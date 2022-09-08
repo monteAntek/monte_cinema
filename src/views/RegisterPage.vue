@@ -21,13 +21,15 @@ import BaseTextInput from '@/components/global/BaseTextInput.vue';
 import BaseCheckbox from '@/components/global/BaseCheckbox.vue';
 
 import AuthHeader from '@/components/Auth/AuthHeader.vue';
+import PasswordInput from '@/components/Auth/PasswordInput.vue';
 
 export default defineComponent({
-  name: 'RegisterForm',
+  name: 'RegisterPage',
   components: {
     AuthHeader,
     BaseButton,
     BaseTextInput,
+    PasswordInput,
     BaseCheckbox,
     Datepicker
   },
@@ -73,10 +75,11 @@ export default defineComponent({
           alert(error);
           console.error(error);
         }
-      } else
+      } else {
         alert(
           'Some form fields must be empty or invalid, please check the hints!'
         );
+      }
     }
   },
   validations() {
@@ -134,17 +137,14 @@ export default defineComponent({
             }}</span>
           </template>
         </BaseTextInput>
-        <BaseTextInput
+        <PasswordInput
           class="register__form__input"
           id="password"
           v-model="password"
-          type="password"
           required
           placeholder="Enter your password"
           @focus="v$.password.$touch()"
-        >
-          <template #label> password </template>
-        </BaseTextInput>
+        />
         <div class="input-hints">
           <span
             class="input-hints__element"
@@ -311,7 +311,6 @@ export default defineComponent({
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 124px 0;
 
   &__form {
     width: 600px;
@@ -321,6 +320,7 @@ export default defineComponent({
     border-radius: $br-24;
     box-shadow: $form-container-shadow;
     padding: 64px;
+    margin-bottom: 124px;
     &__input {
       margin-bottom: 24px;
     }
