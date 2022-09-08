@@ -9,15 +9,17 @@ import { required, email, helpers } from '@vuelidate/validators';
 
 import BaseButton from '@/components/global/BaseButton.vue';
 import BaseTextInput from '@/components/global/BaseTextInput.vue';
+import PasswordInput from '@/components/Auth/PasswordInput.vue';
 
 import AuthHeader from '@/components/Auth/AuthHeader.vue';
 
 export default defineComponent({
-  name: 'RegisterPage',
+  name: 'LoginPage',
   components: {
     AuthHeader,
     BaseButton,
-    BaseTextInput
+    BaseTextInput,
+    PasswordInput
   },
   data() {
     return {
@@ -81,7 +83,7 @@ export default defineComponent({
           }}</span>
         </template>
       </BaseTextInput>
-      <BaseTextInput
+      <PasswordInput
         class="login__form__input"
         id="password"
         v-model="password"
@@ -96,7 +98,7 @@ export default defineComponent({
             error.$message
           }}</span>
         </template>
-      </BaseTextInput>
+      </PasswordInput>
       <div class="login__form__actions">
         <BaseButton
           class="login__form__actions__login"
@@ -128,6 +130,7 @@ export default defineComponent({
     border-radius: $br-24;
     box-shadow: $form-container-shadow;
     padding: 64px;
+    margin-bottom: 124px;
     &__input {
       margin-bottom: 24px;
     }
