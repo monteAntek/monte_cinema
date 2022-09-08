@@ -20,22 +20,13 @@ export default defineComponent({
   data() {
     return {
       isPasswordVisible: false,
-      inputType: 'password',
-      inputValue: ''
+      inputType: 'password'
     };
-  },
-  watch: {
-    inputValue() {
-      this.$emit('update:modelValue', this.inputValue);
-      this.$emit('focus');
-    }
   },
   methods: {
     toggleIsPasswordVisible() {
       this.isPasswordVisible = !this.isPasswordVisible;
-      this.inputType === 'text'
-        ? (this.inputType = 'password')
-        : (this.inputType = 'text');
+      this.inputType = this.inputType === 'text' ? 'password' : 'text';
     }
   },
   emits: ['focus', 'input', 'update:modelValue']
@@ -46,10 +37,12 @@ export default defineComponent({
   <div class="password-input" v-bind="$attrs">
     <BaseTextInput
       :type="inputType"
-      v-model="inputValue"
+      :model-value="modelValue"
       :id="$attrs.id"
       :required="$attrs.required"
       :placeholder="$attrs.placeholder"
+      @update:modelValue="$emit('update:modelValue', $event)"
+      @focus="$emit('focus', $event)"
     >
       <template #label> password </template>
       <template #icon>
