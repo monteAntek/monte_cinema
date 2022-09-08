@@ -15,16 +15,6 @@ export default defineComponent({
       type: String
     }
   },
-  data() {
-    return {
-      inputValue: ''
-    };
-  },
-  watch: {
-    inputValue() {
-      this.$emit('update:modelValue', this.inputValue);
-    }
-  },
   emits: ['focus', 'input', 'update:modelValue']
 });
 </script>
@@ -33,10 +23,11 @@ export default defineComponent({
   <div class="search-input" v-bind="$attrs">
     <BaseTextInput
       :type="$attrs.type"
-      v-model="inputValue"
+      :model-value="inputValue"
       :id="$attrs.id"
       :required="$attrs.required"
       :placeholder="$attrs.placeholder"
+      @update:modelValue="$emit('update:modelValue', $event)"
     >
       <template #label> search </template>
       <template #icon>
