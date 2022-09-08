@@ -1,17 +1,8 @@
 <script>
 import { defineComponent } from 'vue';
 
-import SearchIcon from '@/assets/icons/search-icon.svg';
-import ViewOffIcon from '@/assets/icons/view-off-icon.svg';
-import ViewOnIcon from '@/assets/icons/view-on-icon.svg';
-
 export default defineComponent({
   name: 'BaseTextInput',
-  components: {
-    SearchIcon,
-    ViewOffIcon,
-    ViewOnIcon
-  },
   props: {
     type: {
       type: String,
@@ -20,24 +11,6 @@ export default defineComponent({
     modelValue: {
       type: String,
       default: ''
-    },
-    isSearch: {
-      type: Boolean,
-      default: false
-    }
-  },
-  data() {
-    return {
-      isPasswordVisible: false,
-      inputType: this.type
-    };
-  },
-  methods: {
-    toggleIsPasswordVisible() {
-      this.isPasswordVisible = !this.isPasswordVisible;
-      this.inputType === 'text'
-        ? (this.inputType = 'password')
-        : (this.inputType = 'text');
     }
   },
   computed: {
@@ -59,21 +32,13 @@ export default defineComponent({
         <input
           class="base-input__container__input"
           v-bind="$attrs"
-          :type="inputType"
+          :type="type"
           :modelValue="modelValue"
           @input="$emit('update:modelValue', $event.target.value)"
         />
-        <SearchIcon class="base-input__container__search" v-if="isSearch" />
-        <ViewOffIcon
-          class="base-input__container__show-password"
-          v-if="inputType === 'text' && isPasswordVisible"
-          @click="toggleIsPasswordVisible"
-        />
-        <ViewOnIcon
-          class="base-input__container__show-password"
-          v-if="inputType === 'password' && !isPasswordVisible"
-          @click="toggleIsPasswordVisible"
-        />
+        <div v-if="$slots.icon" class="base-input__container__icon">
+          <slot name="icon" />
+        </div>
       </div>
       <div v-if="$slots.error" class="base-input__container__error">
         <slot name="error" />
@@ -117,18 +82,11 @@ export default defineComponent({
       }
     }
 
-    &__search,
-    &__show-password {
+    &__icon {
       font-size: $fs-32;
       position: absolute;
       right: 3%;
-      top: 25%;
-    }
-
-    &__show-password {
-      &:hover {
-        cursor: pointer;
-      }
+      top: 20%;
     }
 
     &__error {
