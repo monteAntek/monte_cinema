@@ -19,7 +19,7 @@ export default defineComponent({
   data() {
     return {
       searchQuery: '',
-      movieCategory: ''
+      movieCategory: 'All Categories'
     };
   },
   computed: {
@@ -63,7 +63,7 @@ export default defineComponent({
         v-model="movieCategory"
         :selectOptions="selectGenres"
       >
-        category
+        <template #label> category </template>
       </BaseSelect>
     </div>
     <MoviesContainer class="movies__container" :movies="filteredMovies" />
