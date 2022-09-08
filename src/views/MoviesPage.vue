@@ -3,8 +3,8 @@ import { defineComponent } from 'vue';
 
 import { mapState } from 'pinia';
 
-import BaseTextInput from '@/components/global/BaseTextInput.vue';
 import BaseSelect from '@/components/global/BaseSelect.vue';
+import SearchInput from '@/components/MoviesPage/SearchInput.vue';
 import MoviesContainer from '@/components/MoviesPage/MoviesContainer.vue';
 
 import { useMoviesStore } from '@/store/movies';
@@ -12,7 +12,7 @@ import { useMoviesStore } from '@/store/movies';
 export default defineComponent({
   name: 'MoviesPage',
   components: {
-    BaseTextInput,
+    SearchInput,
     BaseSelect,
     MoviesContainer
   },
@@ -50,16 +50,13 @@ export default defineComponent({
   <div class="movies">
     <h1 class="movies__heading">All the movies</h1>
     <div class="movies__search-bar">
-      <BaseTextInput
+      <SearchInput
         class="movies__search-bar__search"
         inputName="search"
         type="text"
         v-model="searchQuery"
         placeholder="What are you looking for?"
-        isSearch
-      >
-        search
-      </BaseTextInput>
+      />
       <BaseSelect
         class="movies__search-bar__category"
         inputName="category"
