@@ -1,11 +1,11 @@
 import { defaultClient } from '@/api/client';
 
 export const getAllMovies = async () => {
-  const response = await defaultClient.get('/movies');
-  return response.data;
+  const { data } = await defaultClient.get('/movies');
+  return data;
 };
 
 export const getMovieDetails = async (id) => {
-  const response = await defaultClient.get(`/movies/${id}`);
-  return response.data;
+  const { data } = await defaultClient.get(`/movies/${id}`);
+  return data;
 };
