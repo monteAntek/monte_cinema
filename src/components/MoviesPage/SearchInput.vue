@@ -5,7 +5,7 @@ import BaseTextInput from '@/components/global/BaseTextInput.vue';
 import SearchIcon from '@/assets/icons/search-icon.svg';
 
 export default defineComponent({
-  name: 'PasswordInput',
+  name: 'SearchInput',
   components: {
     BaseTextInput,
     SearchIcon
@@ -23,7 +23,7 @@ export default defineComponent({
   <div class="search-input" v-bind="$attrs">
     <BaseTextInput
       :type="$attrs.type"
-      :model-value="inputValue"
+      :model-value="modelValue"
       :id="$attrs.id"
       :required="$attrs.required"
       :placeholder="$attrs.placeholder"
