@@ -40,6 +40,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .auth-header {
   width: 603px;
+  margin-top: 124px;
   margin-bottom: 40px;
   &__main,
   &__sub {
