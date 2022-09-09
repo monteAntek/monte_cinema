@@ -10,7 +10,10 @@ export default defineComponent({
   },
   props: {
     selectOptions: {
-      type: Array
+      type: Array,
+      default() {
+        return [];
+      }
     },
     modelValue: {
       type: String
