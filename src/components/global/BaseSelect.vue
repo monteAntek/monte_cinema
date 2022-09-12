@@ -16,7 +16,8 @@ export default defineComponent({
       }
     },
     modelValue: {
-      type: String
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -47,7 +48,7 @@ export default defineComponent({
       class="select__button"
       aria-haspopup="true"
       aria-controls="list"
-      @click="toggleSelect"
+      @click="toggleSelect()"
     >
       <span class="select__selectedOption">{{ currentOption }}</span>
       <SelectArrowIcon class="select__icon" />
