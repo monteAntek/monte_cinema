@@ -1,8 +1,13 @@
 <script>
 import { defineComponent } from 'vue';
 
+import BaseHeader from '@/components/global/BaseHeader.vue';
+
 export default defineComponent({
   name: 'AuthHeader',
+  components: {
+    BaseHeader
+  },
   props: {
     activeStep: {
       type: Number
@@ -31,41 +36,13 @@ export default defineComponent({
 </script>
 
 <template>
-  <section class="auth-header">
-    <h1 class="auth-header__main">{{ mainText }}</h1>
-    <h2 class="auth-header__sub">{{ subText }}</h2>
-  </section>
+  <div class="auth-header">
+    <BaseHeader :headerText="mainText" :subHeaderText="subText" />
+  </div>
 </template>
 
 <style lang="scss" scoped>
 .auth-header {
   width: 603px;
-  margin-top: 124px;
-  margin-bottom: 40px;
-  &__main,
-  &__sub {
-    align-self: flex-start;
-    font-family: $font-eczar;
-    font-weight: $fw-600;
-    font-size: $fs-80;
-    line-height: 1.02;
-    letter-spacing: -0.01em;
-    @include screen-small {
-      font-size: $fs-40;
-    }
-  }
-
-  &__main {
-    color: $color-tuna-gray;
-  }
-
-  &__sub {
-    color: $color-jumbo-gray;
-  }
-
-  @include screen-small {
-    text-align: center;
-    width: 100%;
-  }
 }
 </style>
