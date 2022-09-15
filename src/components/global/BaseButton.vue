@@ -21,7 +21,8 @@ export default defineComponent({
           'gray-fill',
           'gray-border',
           'red-text',
-          'gray-text'
+          'gray-text',
+          'dark-gray-text'
         ].includes(value);
       },
       default: 'red-fill'
@@ -46,6 +47,7 @@ export default defineComponent({
         { 'button--gray-border': this.colorScheme === 'gray-border' },
         { 'button--red-text': this.colorScheme === 'red-text' },
         { 'button--gray-text': this.colorScheme === 'gray-text' },
+        { 'button--dark-gray-text': this.colorScheme === 'dark-gray-text' },
         { 'button--small': this.size === 'small' },
         { 'button--medium': this.size === 'medium' },
         { 'button--large': this.size === 'large' },
@@ -89,9 +91,6 @@ export default defineComponent({
   &:hover {
     cursor: pointer;
   }
-  @include screen-small {
-    width: 100%;
-  }
 
   &--red-fill {
     background-color: $color-cherry-red;
@@ -103,6 +102,20 @@ export default defineComponent({
     &:focus-visible {
       background-color: $color-totem-pole-red;
       border-color: $color-bittersweet-red;
+      color: $color-snow-white;
+    }
+  }
+
+  &--red-border {
+    background-color: $color-snow-white;
+    border-color: $color-cherry-red;
+    color: $color-cherry-red;
+    &:hover,
+    &:active,
+    &:focus,
+    &:focus-visible {
+      background-color: $color-cherry-red;
+      border-color: $color-totem-pole-red;
       color: $color-snow-white;
     }
   }
@@ -129,6 +142,19 @@ export default defineComponent({
     &:focus-visible {
       background-color: $color-wisp-pink;
       border-color: $color-cherry-red;
+    }
+  }
+
+  &--dark-gray-text {
+    background-color: transparent;
+    border-color: $color-tuna-gray;
+    color: $color-tuna-gray;
+    &:hover,
+    &:active,
+    &:focus,
+    &:focus-visible {
+      background-color: $color-tuna-gray;
+      color: $color-snow-white;
     }
   }
 
