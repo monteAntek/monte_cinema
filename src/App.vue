@@ -7,7 +7,7 @@ import NavBar from '@/components/global/NavBar/NavBar.vue';
 import DataLoader from '@/components/global/DataLoader.vue';
 import ErrorBoundary from '@/components/global/ErrorBoundary.vue';
 
-import { useMoviesStore } from '@/store/movies.js';
+import { useMoviesStore } from '@/store/movies';
 
 export default defineComponent({
   components: {
