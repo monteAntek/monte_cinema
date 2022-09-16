@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
 import { hoursAndMinutes } from '@/helpers/date';
 
 import BaseTag from '@/components/global/BaseTag.vue';
@@ -9,13 +7,10 @@ import BaseButton from '@/components/global/BaseButton.vue';
 import type { Movie } from '@/types/movie';
 import type { Screening } from '@/types/screening';
 
-const props = defineProps<{
+defineProps<{
   movie: Movie;
   screenings: Screening[];
 }>();
-
-const movie = ref(props.movie);
-const screenings = ref(props.screenings);
 
 function getMovieDuration(length: number): string {
   return hoursAndMinutes(length);
