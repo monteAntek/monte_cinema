@@ -1,19 +1,18 @@
 <script setup lang="ts">
 interface Props {
   headerText: string;
-  subHeaderText: string;
+  subHeaderText?: string;
 }
 
 withDefaults(defineProps<Props>(), {
-  headerText: 'Header',
-  subHeaderText: 'Sub Header'
+  headerText: 'Header'
 });
 </script>
 
 <template>
   <section class="header">
     <h1 class="header__main">{{ headerText }}</h1>
-    <h2 class="header__sub">{{ subHeaderText }}</h2>
+    <h2 v-if="subHeaderText" class="header__sub">{{ subHeaderText }}</h2>
   </section>
 </template>
 
