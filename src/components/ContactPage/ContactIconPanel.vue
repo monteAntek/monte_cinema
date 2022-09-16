@@ -21,19 +21,12 @@ import ContactIconDribble from '@/assets/icons/contact/contact-icon-dribble.svg?
 
 <style lang="scss" scoped>
 .panel {
-  max-width: 80px;
-  max-height: 412px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: flex-start;
-  gap: 24px;
   padding: 24px;
+  gap: 1.92px;
   background-color: $color-athens-gray;
-
-  @include screen-small {
-    flex-direction: row;
-    gap: 9px;
-    max-width: 320px;
-  }
 }
 </style>

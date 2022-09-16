@@ -7,8 +7,10 @@ import ContactIconPhone from '@/assets/icons/contact/contact-icon-phone.svg?comp
 <template>
   <section class="details">
     <div class="details__element">
-      <ContactIconLocation />
-      <div class="details__element__rows">
+      <div class="details__element__icon">
+        <ContactIconLocation />
+      </div>
+      <div class="details__element__text">
         <p>Monterail Sp. z o. o.</p>
         <p>ul. Oławska 27-29</p>
         <p>50-123 Wrocław</p>
@@ -16,38 +18,49 @@ import ContactIconPhone from '@/assets/icons/contact/contact-icon-phone.svg?comp
       </div>
     </div>
     <div class="details__element">
-      <ContactIconEmail />
-      <p>hello@monterail.com</p>
+      <div class="details__element__icon">
+        <ContactIconEmail />
+      </div>
+      <div class="details__element__text">
+        <p>hello@monterail.com</p>
+      </div>
     </div>
     <div class="details__element">
-      <ContactIconPhone />
-      <p>+48 533 600 136</p>
+      <div class="details__element__icon">
+        <ContactIconPhone />
+      </div>
+      <div class="details__element__text">
+        <p>+48 533 600 136</p>
+      </div>
     </div>
   </section>
 </template>
 
 <style lang="scss" scoped>
 .details {
-  height: 412px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: flex-start;
-  gap: 46px;
   background-color: $color-athens-gray;
-  padding: 64px 90px;
-
+  padding: 64px 70px;
   &__element {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     gap: 20px;
-    font-family: $font-roboto-mono;
-    font-weight: $fw-400;
-    font-size: $fs-18;
-    line-height: 1.8;
-    letter-spacing: 0.015em;
-    color: $color-tuna-gray;
+    &__icon {
+      align-self: flex-start;
+    }
+    &__text {
+      font-family: $font-roboto-mono;
+      font-weight: $fw-400;
+      font-size: $fs-18;
+      line-height: 1.77;
+      letter-spacing: 0.015em;
+      color: $color-tuna-gray;
+    }
   }
 }
 </style>
