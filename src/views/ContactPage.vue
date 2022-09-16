@@ -1,13 +1,19 @@
-<script>
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'ContactPage'
-});
+<script setup lang="ts">
+import ContactMap from '@/components/ContactPage/ContactMap.vue';
+import ContactDetails from '@/components/ContactPage/ContactDetails.vue';
+import ContactIconPanel from '@/components/ContactPage/ContactIconPanel.vue';
 </script>
 
 <template>
-  <h1>ContactPage</h1>
+  <div class="contact">
+    <ContactMap />
+    <ContactDetails />
+    <ContactIconPanel />
+  </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.contact {
+  margin: 0 24px !important;
+}
+</style>
