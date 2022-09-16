@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
 
 import { formatDate, nextDay, dayNameENG } from '@/helpers/date';
@@ -21,11 +21,10 @@ interface Props {
   modelValue: string;
 }
 
-const props = withDefaults(defineProps<Props>(), {
+
+withDefaults(defineProps<Props>(), {
   modelValue: ''
 });
-
-const modelValue = ref(props.modelValue);
 
 const selectDays = computed(() => {
   const today = new Date();

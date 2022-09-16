@@ -46,7 +46,8 @@ function getMovieScreenings(movieId: number): Screening[] {
   );
 }
 
-watchEffect(async () => {
+
+watchEffect(() => {
   screenings.getDailyScreenings();
 });
 </script>

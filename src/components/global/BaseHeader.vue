@@ -1,18 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
 interface Props {
   headerText: string;
   subHeaderText: string;
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   headerText: 'Header',
   subHeaderText: 'Sub Header'
 });
-
-const headerText = ref(props.headerText);
-const subHeaderText = ref(props.subHeaderText);
 </script>
 
 <template>
