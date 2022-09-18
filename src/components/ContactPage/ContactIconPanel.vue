@@ -9,13 +9,13 @@ import ContactIconDribble from '@/assets/icons/contact/contact-icon-dribble.svg?
 </script>
 <template>
   <div class="panel">
-    <ContactIconTwitter class="panel__icon" />
-    <ContactIconFacebook class="panel__icon" />
-    <ContactIconLinkedin class="panel__icon" />
-    <ContactIconInstagram class="panel__icon" />
-    <ContactIconGithub class="panel__icon" />
-    <ContactIconBehance class="panel__icon" />
-    <ContactIconDribble class="panel__icon" />
+    <a to="#" class="panel__link"><ContactIconTwitter /></a>
+    <a to="#" class="panel__link"> <ContactIconFacebook /></a>
+    <a to="#" class="panel__link"> <ContactIconLinkedin /></a>
+    <a to="#" class="panel__link"> <ContactIconInstagram /></a>
+    <a to="#" class="panel__link"><ContactIconGithub /></a>
+    <a to="#" class="panel__link"><ContactIconBehance /></a>
+    <a to="#" class="panel__link"><ContactIconDribble /></a>
   </div>
 </template>
 
@@ -26,7 +26,18 @@ import ContactIconDribble from '@/assets/icons/contact/contact-icon-dribble.svg?
   justify-content: space-between;
   align-items: flex-start;
   padding: 24px;
-  gap: 1.92px;
   background-color: $color-athens-gray;
+  border-radius: 0 8px 8px 0;
+
+  &__link {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  @include screen-small {
+    flex-direction: row;
+    border-radius: 0 0 8px 8px;
+  }
 }
 </style>
