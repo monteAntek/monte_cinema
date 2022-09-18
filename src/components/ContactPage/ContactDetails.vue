@@ -11,10 +11,12 @@ import ContactIconPhone from '@/assets/icons/contact/contact-icon-phone.svg?comp
         <ContactIconLocation />
       </div>
       <div class="details__element__text">
-        <p>Monterail Sp. z o. o.</p>
-        <p>ul. Oławska 27-29</p>
-        <p>50-123 Wrocław</p>
-        <p>Poland</p>
+        <p>
+          Monterail Sp. z o.o.<br />
+          ul. Oławska 27-29<br />
+          50-123 Wrocław<br />
+          Poland
+        </p>
       </div>
     </div>
     <div class="details__element">
@@ -43,16 +45,23 @@ import ContactIconPhone from '@/assets/icons/contact/contact-icon-phone.svg?comp
   justify-content: space-between;
   align-items: flex-start;
   background-color: $color-athens-gray;
-  padding: 64px 70px;
+  padding: 64px 32px 64px 64px;
+
   &__element {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 20px;
+
+    &:not(:last-child) {
+      margin-bottom: 40px;
+    }
+
     &__icon {
       align-self: flex-start;
     }
+
     &__text {
       font-family: $font-roboto-mono;
       font-weight: $fw-400;
@@ -60,7 +69,16 @@ import ContactIconPhone from '@/assets/icons/contact/contact-icon-phone.svg?comp
       line-height: 1.77;
       letter-spacing: 0.015em;
       color: $color-tuna-gray;
+
+      p {
+        display: block;
+        white-space: nowrap;
+      }
     }
+  }
+
+  @include screen-small {
+    padding: 30px;
   }
 }
 </style>
