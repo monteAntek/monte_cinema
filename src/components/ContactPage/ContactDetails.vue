@@ -54,6 +54,10 @@ import ContactIconPhone from '@/assets/icons/contact/contact-icon-phone.svg?comp
     align-items: center;
     gap: 20px;
 
+    @include screen-small {
+      gap: 10px;
+    }
+
     &:not(:last-child) {
       margin-bottom: 40px;
     }
@@ -69,6 +73,10 @@ import ContactIconPhone from '@/assets/icons/contact/contact-icon-phone.svg?comp
       line-height: 1.77;
       letter-spacing: 0.015em;
       color: $color-tuna-gray;
+
+      @include screen-small {
+        font-size: $fs-16;
+      }
 
       p {
         display: block;
