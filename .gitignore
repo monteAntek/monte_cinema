@@ -30,3 +30,5 @@ coverage
 #Other
 .env.development
 .env.production
+.firebase
+.github
