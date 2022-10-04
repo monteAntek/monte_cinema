@@ -1,20 +1,11 @@
-<script>
-import { defineComponent } from 'vue';
-
+<script setup lang="ts">
 import MovieCard from '@/components/MoviesPage/MovieCard.vue';
 
-export default defineComponent({
-  name: 'MoviesContainer',
-  components: {
-    MovieCard
-  },
-  props: {
-    movies: {
-      type: Array,
-      required: true
-    }
-  }
-});
+import type { Movie } from '@/types/movie';
+
+defineProps<{
+  movies: Movie[];
+}>();
 </script>
 
 <template>

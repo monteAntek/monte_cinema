@@ -1,28 +1,18 @@
-<script>
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { computed } from 'vue';
 
 import BaseTag from '@/components/global/BaseTag.vue';
 
-export default defineComponent({
-  name: 'MovieCard',
-  components: {
-    BaseTag
-  },
-  props: {
-    movie: {
-      type: Object,
-      default() {
-        return {};
-      }
-    }
-  },
-  computed: {
-    movieDuration() {
-      const hours = Math.floor(this.movie.length / 60);
-      const minutes = `0${this.movie.length % 60}`.slice(-2);
-      return `${hours}h ${minutes}min`;
-    }
-  }
+import type { Movie } from '@/types/movie';
+
+const props = defineProps<{
+  movie: Movie;
+}>();
+
+const movieDuration = computed(() => {
+  const hours = Math.floor(props.movie.length / 60);
+  const minutes = `0${props.movie.length % 60}`.slice(-2);
+  return `${hours}h ${minutes}min`;
 });
 </script>
 
