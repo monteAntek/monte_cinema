@@ -1,123 +1,110 @@
-<script>
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { computed, ref } from 'vue';
 
-import { mapState } from 'pinia';
-
+import BreadCrumbs from '@/components/global/BreadCrumbs.vue';
+import BaseHeader from '@/components/global/BaseHeader.vue';
 import BaseSelect from '@/components/global/BaseSelect.vue';
 import SearchInput from '@/components/MoviesPage/SearchInput.vue';
 import MoviesContainer from '@/components/MoviesPage/MoviesContainer.vue';
 
 import { useMoviesStore } from '@/store/movies';
+const moviesStore = useMoviesStore();
 
-export default defineComponent({
-  name: 'MoviesPage',
-  components: {
-    SearchInput,
-    BaseSelect,
-    MoviesContainer
-  },
-  data() {
-    return {
-      searchQuery: '',
-      movieCategory: 'All Categories'
-    };
-  },
-  computed: {
-    ...mapState(useMoviesStore, ['allMovies', 'genres']),
-    moviesByGenre() {
-      return this.movieCategory === '' ||
-        this.movieCategory === 'All Categories'
-        ? this.allMovies
-        : this.allMovies.filter(
-            (movie) => movie.genre.name === this.movieCategory
-          );
-    },
-    filteredMovies() {
-      return this.searchQuery
-        ? this.moviesByGenre.filter((movie) =>
-            movie.title.toLowerCase().includes(this.searchQuery.toLowerCase())
-          )
-        : this.moviesByGenre;
-    },
-    selectGenres() {
-      return ['All Categories', ...this.genres];
-    }
-  }
+const searchQuery = ref('');
+const movieCategory = ref('All Categories');
+
+const moviesByGenre = computed(() => {
+  return movieCategory.value === '' || movieCategory.value === 'All Categories'
+    ? moviesStore.allMovies
+    : moviesStore.allMovies.filter(
+        (movie) => movie.genre.name === movieCategory.value
+      );
+});
+
+const filteredMovies = computed(() => {
+  return searchQuery.value
+    ? moviesByGenre.value.filter((movie) =>
+        movie.title.toLowerCase().includes(searchQuery.value.toLowerCase())
+      )
+    : moviesByGenre.value;
+});
+
+const selectGenres = computed(() => {
+  return ['All Categories', ...moviesStore.genres];
+});
+
+const breadCrumbs = computed(() => {
+  return [{ label: 'Movies' }];
 });
 </script>
 
 <template>
-  <div class="movies">
-    <h1 class="movies__heading">All the movies</h1>
-    <div class="movies__search-bar">
-      <SearchInput
-        class="movies__search-bar__search"
-        inputName="search"
-        type="text"
-        v-model="searchQuery"
-        placeholder="What are you looking for?"
+  <section class="movies">
+    <BreadCrumbs :crumbs="breadCrumbs" />
+    <div class="movies__body">
+      <BaseHeader header-text="All the movies" class="movies__body__header" />
+      <div class="movies__body__search-bar">
+        <SearchInput
+          class="movies__body__search-bar__search"
+          inputName="search"
+          type="text"
+          v-model="searchQuery"
+          placeholder="What are you looking for?"
+        />
+        <BaseSelect
+          class="movies__body__search-bar__category"
+          inputName="category"
+          v-model="movieCategory"
+          :selectOptions="selectGenres"
+        >
+          <template #label> category </template>
+        </BaseSelect>
+      </div>
+      <MoviesContainer
+        class="movies__body__container"
+        :movies="filteredMovies"
       />
-      <BaseSelect
-        class="movies__search-bar__category"
-        inputName="category"
-        v-model="movieCategory"
-        :selectOptions="selectGenres"
-      >
-        <template #label> category </template>
-      </BaseSelect>
     </div>
-    <MoviesContainer class="movies__container" :movies="filteredMovies" />
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>
 .movies {
-  @include flex-Col-JCenter-ACenter;
+  &__body {
+    @include flex-Col-JCenter-ACenter;
 
-  &__heading {
-    align-self: flex-start;
-    font-family: $font-eczar;
-    font-size: $fs-80;
-    font-weight: $fw-600;
-    line-height: 1.02;
-    letter-spacing: -0.01em;
-    color: $color-tuna-gray;
-    margin-top: $mt-40;
-    margin-bottom: 32px;
-
-    @include screen-small {
-      font-size: $fs-48;
-      align-self: center;
-    }
-  }
-
-  &__search-bar {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 40px;
-    margin-bottom: 64px;
-
-    &__search {
-      flex-grow: 5;
+    &__header {
+      margin-bottom: 32px;
     }
 
-    &__category {
-      flex-grow: 2;
-    }
-    @include screen-small {
-      flex-direction: column;
-      &__search,
+    &__search-bar {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+      margin-bottom: 64px;
+
+      &__search {
+        flex-grow: 5;
+      }
+
       &__category {
-        width: 100%;
+        flex-grow: 2;
+      }
+      @include screen-small {
+        flex-direction: column;
+        &__search,
+        &__category {
+          width: 100%;
+        }
       }
     }
-  }
 
-  @include screen-small {
-    padding: 0 24px;
+    @include screen-small {
+      padding: 0 24px;
+    }
   }
 }
 </style>
