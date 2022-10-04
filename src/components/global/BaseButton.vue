@@ -79,6 +79,11 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
   border: 2px solid transparent;
   border-radius: $br-64;
   text-align: center;
@@ -87,7 +92,6 @@ export default defineComponent({
   letter-spacing: 0.015em;
   font-family: $font-roboto-mono;
   text-decoration: none;
-  display: inline-block;
   &:hover {
     cursor: pointer;
   }
@@ -177,6 +181,11 @@ export default defineComponent({
 
   &--large {
     padding: 12px 32px;
+    font-size: $fs-16;
+  }
+
+  &--medium {
+    padding: 0 24px;
     font-size: $fs-16;
   }
 }
