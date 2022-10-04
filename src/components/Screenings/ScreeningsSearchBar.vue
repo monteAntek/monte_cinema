@@ -12,18 +12,19 @@ import Datepicker from '@vuepic/vue-datepicker';
 import { useScreeningsStore } from '@/store/screenings';
 import { useMoviesStore } from '@/store/movies';
 
-const screenings = useScreeningsStore();
-const { currentDate } = storeToRefs(screenings);
+const screeningsStore = useScreeningsStore();
+const { currentDate } = storeToRefs(screeningsStore);
 
 const movies = useMoviesStore();
 
 interface Props {
-  modelValue: string;
+  modelValue?: string;
+  forSingleMovie?: boolean;
 }
 
-
 withDefaults(defineProps<Props>(), {
-  modelValue: ''
+  modelValue: '',
+  forSingleMovie: false
 });
 
 const selectDays = computed(() => {
@@ -50,7 +51,7 @@ const movieTitles = computed(() => {
 });
 
 function setCurrentDate(date: string) {
-  screenings.setCurrentDate(date);
+  screeningsStore.setCurrentDate(date);
 }
 </script>
 
@@ -75,7 +76,7 @@ function setCurrentDate(date: string) {
         </template>
       </Datepicker>
     </div>
-    <div class="search-bar__movie">
+    <div v-if="!forSingleMovie" class="search-bar__movie">
       <BaseSelect
         :selectOptions="movieTitles"
         :modelValue="modelValue"
