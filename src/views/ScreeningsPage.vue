@@ -3,6 +3,7 @@ import { computed, ref, watchEffect } from 'vue';
 
 import { dayNameENG } from '@/helpers/date';
 
+import BreadCrumbs from '@/components/global/BreadCrumbs.vue';
 import BaseHeader from '@/components/global/BaseHeader.vue';
 import ScreeningsSearchBar from '@/components/Screenings/ScreeningsSearchBar.vue';
 import ScreeningsCard from '@/components/Screenings/ScreeningsCard.vue';
@@ -15,7 +16,18 @@ import type { Screening } from '@/types/screening';
 const screenings = useScreeningsStore();
 const movies = useMoviesStore();
 
-const selectedMovie = ref('All movies');
+interface Props {
+  headerSize?: string;
+  movieTitle?: string;
+  forSingleMovie?: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  headerSize: 'large',
+  forSingleMovie: false
+});
+
+const selectedMovie = ref(props.movieTitle ? props.movieTitle : 'All movies');
 
 const headerDate = computed(() => {
   const date = new Date(screenings.currentDate);
@@ -40,12 +52,15 @@ const displayMovies = computed(() => {
   return moviesByTitle.value.filter((movie) => movies.includes(movie.id));
 });
 
+const breadCrumbs = computed(() => {
+  return [{ label: 'Screenings' }];
+});
+
 function getMovieScreenings(movieId: number): Screening[] {
   return screenings.currentScreenings.filter(
     (screening) => screening.movie === movieId
   );
 }
-
 
 watchEffect(() => {
   screenings.getDailyScreenings();
@@ -54,31 +69,49 @@ watchEffect(() => {
 
 <template>
   <section class="screenings">
-    <BaseHeader headerText="Screenings:" :subHeaderText="headerDate" />
-    <ScreeningsSearchBar v-model="selectedMovie" />
-    <section class="screenings__cards">
-      <ScreeningsCard
-        v-for="movie of displayMovies"
-        :key="movie.id"
-        :movie="movie"
-        :screenings="getMovieScreenings(movie.id)"
+    <BreadCrumbs v-if="!forSingleMovie" :crumbs="breadCrumbs" />
+    <div class="screenings__body">
+      <BaseHeader
+        class="screenings__body__header"
+        headerText="Screenings:"
+        :subHeaderText="headerDate"
+        :size="headerSize"
       />
-    </section>
+      <ScreeningsSearchBar
+        v-model="selectedMovie"
+        :for-single-movie="forSingleMovie"
+      />
+      <div class="screenings__body__cards">
+        <ScreeningsCard
+          v-for="movie of displayMovies"
+          :key="movie.id"
+          :movie="movie"
+          :screenings="getMovieScreenings(movie.id)"
+        />
+      </div>
+    </div>
   </section>
 </template>
 
 <style lang="scss" scoped>
 .screenings {
-  &__cards {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    gap: 40px;
-    margin-bottom: 64px;
-  }
-  @include screen-small {
-    padding: 0 24px;
+  &__body {
+    &__header {
+      margin-top: 64px;
+      margin-bottom: 32px;
+    }
+    &__cards {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+      margin-bottom: 64px;
+    }
+
+    @include screen-small {
+      padding: 0 24px;
+    }
   }
 }
 </style>
