@@ -1,27 +1,16 @@
-<script>
-import { defineComponent } from 'vue';
-
-import { mapState } from 'pinia';
+<script setup lang="ts">
+import { computed } from 'vue';
 
 import HeroSection from '@/components/HomePage/HeroSection/HeroSection.vue';
 import MoviesSection from '@/components/HomePage/MoviesSection/MoviesSection.vue';
 import ContactDetails from '@/components/ContactPage/ContactDetails.vue';
+import ScreeningsPage from '@/views/ScreeningsPage.vue';
 
 import { useMoviesStore } from '@/store/movies';
+const moviesStore = useMoviesStore();
 
-export default defineComponent({
-  name: 'HomePage',
-  components: {
-    HeroSection,
-    MoviesSection,
-    ContactDetails
-  },
-  computed: {
-    ...mapState(useMoviesStore, ['allMovies']),
-    comingSoon() {
-      return this.allMovies.filter((movie, index) => index < 3);
-    }
-  }
+const comingSoon = computed(() => {
+  return moviesStore.allMovies.filter((movie, index) => index < 3);
 });
 </script>
 
@@ -29,7 +18,7 @@ export default defineComponent({
   <div class="homepage">
     <HeroSection />
     <MoviesSection :movies="comingSoon" />
-    <div></div>
+    <ScreeningsPage header-size="medium" for-single-movie class="screenings" />
     <ContactDetails class="contact" />
   </div>
 </template>
@@ -40,6 +29,10 @@ export default defineComponent({
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .screenings {
+    width: 100%;
+  }
   .contact {
     width: 600px;
     border-radius: 24px;
