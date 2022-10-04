@@ -8,7 +8,7 @@ import BaseHeader from '@/components/global/BaseHeader.vue';
   <section class="container">
     <BaseHeader class="container__header" header-text="Contact us" />
     <div class="container__body">
-      <ContactMap v-if="$route.name !== 'Home'" class="container__body__map" />
+      <ContactMap class="container__body__map" />
       <ContactDetails class="container__body__details" />
       <ContactIconPanel class="container__body__icons" />
     </div>
@@ -20,15 +20,19 @@ import BaseHeader from '@/components/global/BaseHeader.vue';
   width: 100%;
   margin-bottom: 64px;
 
+  &__header {
+    margin-bottom: 64px;
+
+    @include screen-small {
+      margin-bottom: 24px;
+    }
+  }
+
   &__body {
     display: flex;
 
     &__details {
       flex-grow: 2;
-    }
-
-    @include screen-medium {
-      flex-grow: 0;
     }
 
     @include screen-small {
