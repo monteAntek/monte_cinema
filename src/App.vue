@@ -1,29 +1,16 @@
-<script>
-import { defineComponent } from 'vue';
-
-import { mapState, mapActions } from 'pinia';
+<script setup lang="ts">
+import { onMounted } from 'vue';
 
 import NavBar from '@/components/global/NavBar/NavBar.vue';
 import DataLoader from '@/components/global/DataLoader.vue';
 import ErrorBoundary from '@/components/global/ErrorBoundary.vue';
 
 import { useMoviesStore } from '@/store/movies';
+const moviesStore = useMoviesStore();
+const { fetchAllMovies } = moviesStore;
 
-export default defineComponent({
-  components: {
-    NavBar,
-    DataLoader,
-    ErrorBoundary
-  },
-  computed: {
-    ...mapState(useMoviesStore, ['allMovies', 'genres'])
-  },
-  methods: {
-    ...mapActions(useMoviesStore, ['fetchAllMovies'])
-  },
-  mounted() {
-    this.fetchAllMovies();
-  }
+onMounted(() => {
+  fetchAllMovies();
 });
 </script>
 
