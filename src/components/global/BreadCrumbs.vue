@@ -38,7 +38,7 @@ function goBack() {
       <template v-for="(crumb, index) in crumbs" :key="index">
         <component
           :is="crumb.route ? 'router-link' : 'span'"
-          :to="crumb.route !== '' ? { name: crumb.route } : ''"
+          :to="crumb.route ? { name: crumb.route } : ''"
         >
           {{ crumb.label }}
         </component>
