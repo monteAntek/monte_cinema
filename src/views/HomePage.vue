@@ -10,7 +10,7 @@ import { useMoviesStore } from '@/store/movies';
 const moviesStore = useMoviesStore();
 
 const comingSoon = computed(() => {
-  return moviesStore.allMovies.filter((movie, index) => index < 3);
+  return moviesStore.allMovies.filter((_, index) => index < 3);
 });
 </script>
 

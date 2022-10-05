@@ -27,7 +27,7 @@ const props = withDefaults(defineProps<Props>(), {
   forSingleMovie: false
 });
 
-const selectedMovie = ref(props.movieTitle ? props.movieTitle : 'All movies');
+const selectedMovie = ref(props.movieTitle || 'All movies');
 
 const headerDate = computed(() => {
   const date = new Date(screenings.currentDate);
